@@ -1,6 +1,11 @@
 // src/tools/file_parser.ts
+// @ts-ignore - pdf-parse has no type declarations for npm: imports
 import pdfParse from "npm:pdf-parse";
+
+// @ts-ignore - buffer has no type declarations for npm: imports
 import { Buffer } from "node:buffer";
+
+// @ts-ignore - mammoth has no type declarations for npm: imports
 import mammoth from "npm:mammoth@^1.6.0";
 
 /**
