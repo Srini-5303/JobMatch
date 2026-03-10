@@ -269,4 +269,3 @@ jobmatch-ai/
 
 ---
 
-Built with ❤️ using CoreSpeed's Zypher framework
