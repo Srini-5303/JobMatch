@@ -8,6 +8,14 @@
     "npm:pdf-parse": "npm:pdf-parse@^1.1.1",
     "npm:mammoth": "npm:mammoth@^1.6.0"
   },
+    "compilerOptions": {
+    "lib": ["deno.ns", "dom"],
+    "strict": true,
+    "skipLibCheck": true,
+    "types": ["deno"],
+    "jsx": "react-jsx",
+    "include": ["src/**/*.ts", "src/types/**/*.d.ts"]
+},
   "tasks": {
     "run:server": "deno run --config deno.json -A src/server.ts"
   }
