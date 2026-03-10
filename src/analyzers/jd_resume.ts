@@ -1,7 +1,10 @@
 // src/analyzers/jd_resume.ts
 // Analyzes a job description against a resume and returns a fit score + skill breakdown
 
+// @ts-ignore - Zypher has no type declarations for npm: imports
 import { createZypherContext, ZypherAgent } from "@corespeed/zypher";
+
+// @ts-ignore - rxjs-for-await has no type declarations for npm: imports
 import { eachValueFrom } from "rxjs-for-await";
 import { getProvider, getModelName } from "../providers.ts";
 import { fallbackParseSkills } from "../tools/local_parser.ts";

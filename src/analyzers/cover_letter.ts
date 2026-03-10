@@ -1,7 +1,10 @@
 // src/analyzers/cover_letter.ts
 // Generates a personalized cover letter from resume + job description
 
+// @ts-ignore - Zypher has no type declarations for npm: imports
 import { createZypherContext, ZypherAgent } from "@corespeed/zypher";
+
+// @ts-ignore - rxjs-for-await has no type declarations for npm: imports
 import { eachValueFrom } from "rxjs-for-await";
 import { getProvider, getModelName } from "../providers.ts";
 import type { TaskEventLike, ContentBlock, MessageLike } from "../types.ts";
