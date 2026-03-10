@@ -1,7 +1,10 @@
 // src/analyzers/resume.ts
 // Analyzes resume quality across multiple dimensions (ATS, skill diversity, etc.)
 
+// @ts-ignore - Zypher has no type declarations for npm: imports
 import { createZypherContext, ZypherAgent } from "@corespeed/zypher";
+
+// @ts-ignore - rxjs-for-await has no type declarations for npm: imports
 import { eachValueFrom } from "rxjs-for-await";
 import { getProvider, getModelName } from "../providers.ts";
 import { fallbackParseSkills } from "../tools/local_parser.ts";

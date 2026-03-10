@@ -1,6 +1,7 @@
 // src/providers.ts
 // LLM provider and model selection logic
 
+// @ts-ignore - OpenAIModelProvider has no type declarations for npm: imports
 import { OpenAIModelProvider } from "@corespeed/zypher";
 
 /**
