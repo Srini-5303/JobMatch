@@ -1,0 +1,21 @@
+# Deno
+.deno/
+# Note: deno.lock is kept in version control for reproducible builds
+
+# Environment variables
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
