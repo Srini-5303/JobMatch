@@ -1,8 +1,0 @@
-{
-  "devDependencies": {
-    "@types/deno": "^2.5.0"
-  },
-  "dependencies": {
-    "pdf-parse": "^2.2.2"
-  }
-}
