@@ -1,12 +1,12 @@
 // src/tools/file_parser.ts
 // @ts-ignore - pdf-parse has no type declarations for npm: imports
-import pdfParse from "npm:pdf-parse";
+import pdfParse from "pdf-parse";
 
 // @ts-ignore - buffer has no type declarations for npm: imports
 import { Buffer } from "node:buffer";
 
 // @ts-ignore - mammoth has no type declarations for npm: imports
-import mammoth from "npm:mammoth@^1.6.0";
+import mammoth from "mammoth";
 
 /**
  * Extract text from various file types (PDF, Word, TXT)
@@ -40,7 +40,8 @@ export async function extractTextFromFile(
       // Try using mammoth first (might work for some .doc files)
       try {
         return await extractTextFromDOCX(fileBuffer);
-      } catch (err) {
+      } 
+      catch (_err) {
         throw new Error("DOC files (older Word format) are not fully supported. Please convert to DOCX or PDF.");
       }
     }

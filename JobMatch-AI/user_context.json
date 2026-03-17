@@ -1,0 +1,7 @@
+{
+  "linkedinSummary": "Paste your LinkedIn About section here. Include your headline, summary, and any recommendations you want the LLM to reference.",
+
+  "personalStatement": "Write 3-5 sentences about your career goals, what excites you about software engineering, the kind of company culture you thrive in, and what you are looking for in your next role. This is used to answer 'Why do you want to work here' and 'Where do you see yourself in 5 years' type questions.",
+
+  "githubUsername": "your_github_username"
+}

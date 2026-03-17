@@ -14,6 +14,28 @@ if (!Deno.env.get("HOME")) {
 import "./providers.ts";
 import { analyzeJDResume, searchAndRankJobs, analyzeResumeStrength, generateCoverLetter } from "./agent.ts";
 import { extractTextFromFile } from "./tools/file_parser.ts";
+import { answerQuestion } from "./analyzers/rag_answerer.ts";
+import type { UserContext } from "./analyzers/rag_answerer.ts";
+
+
+async function fetchGitHubSummary(username: string): Promise<string> {
+  try {
+    const res = await fetch(
+      `https://api.github.com/users/${username}/repos?sort=stars&per_page=6`,
+      { headers: { "Accept": "application/vnd.github+json" } }
+    );
+    if (!res.ok) return "GitHub data unavailable.";
+    const repos = await res.json() as Array<{
+      name: string; description: string | null; language: string | null; stargazers_count: number;
+    }>;
+    return repos
+      .map(r => `- ${r.name} (${r.language ?? "N/A"}): ${r.description ?? "No description"} [⭐${r.stargazers_count}]`)
+      .join("\n");
+  } catch {
+    return "GitHub data unavailable.";
+  }
+}
+
 
 // Helper function to extract company name from job description
 function extractCompanyNameFromJD(jd: string): string | undefined {
@@ -91,6 +113,65 @@ async function start() {
               status: 500,
               headers: { "Content-Type": "application/json" },
             });
+          }
+        }
+
+        if (req.method === "POST" && url.pathname === "/answer-question") {
+          try {
+            const body = await req.json() as {
+              question: string;
+              jd:       string;
+              resume:   string;
+            };
+
+            if (!body.question || !body.jd || !body.resume) {
+              return new Response(
+                JSON.stringify({ error: "question, jd, and resume are required" }),
+                { status: 400, 
+                  headers: { "Content-Type": "application/json" },
+                }
+              );
+            }
+
+            // Load user_context.json from project root
+            const contextRaw  = await Deno.readTextFile("./user_context.json");
+            const contextJson = JSON.parse(contextRaw) as {
+              linkedinSummary:   string;
+              personalStatement: string;
+              githubUsername:    string;
+            };
+
+            // Fetch live GitHub data
+            const githubSummary = await fetchGitHubSummary(contextJson.githubUsername);
+
+            const userContext: UserContext = {
+              resume:            body.resume,
+              linkedinSummary:   contextJson.linkedinSummary,
+              githubSummary,
+              personalStatement: contextJson.personalStatement,
+            };
+
+            const answer = await answerQuestion({
+              question: body.question,
+              jd:       body.jd,
+              context:  userContext,
+            });
+
+            return new Response(
+              JSON.stringify({ answer }),
+              { status: 200, 
+                headers: { "Content-Type": "application/json" },
+              }
+            );
+
+          } catch (err) {
+            console.error("/answer-question error:", err);
+            return new Response(
+              JSON.stringify({ error: "Failed to generate answer" }),
+              { status: 500, 
+                headers: { "Content-Type": "application/json" },
+              }
+            );
           }
         }
         

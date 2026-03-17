@@ -60,7 +60,7 @@ export async function searchAndRankJobs(
   resumeText: string,
   preferences: JobSearchPreferences
 ): Promise<JobSearchResult> {
-  const role = preferences.role || "software engineer";
+  const role = preferences.role || "Machine Learning Engineer";
   const searchQuery = preferences.keywords ? `${role} ${preferences.keywords}` : role;
   const fullQuery = `${searchQuery}${preferences.location ? ` ${preferences.location}` : ""}`;
 

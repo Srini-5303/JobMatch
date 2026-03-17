@@ -5,18 +5,21 @@
     "rxjs-for-await": "npm:rxjs-for-await@1.0.0",
     "npm:openai": "npm:openai@^4.0.0",
     "npm:rxjs": "npm:rxjs@^7.0.0",
-    "npm:pdf-parse": "npm:pdf-parse@^1.1.1",
-    "npm:mammoth": "npm:mammoth@^1.6.0"
+    "pdf-parse": "npm:pdf-parse@^1.1.1",
+    "mammoth": "npm:mammoth@^1.6.0",
+    "groq-sdk": "npm:groq-sdk"
   },
-    "compilerOptions": {
-    "lib": ["deno.ns", "dom"],
+  "nodeModulesDir": "auto",
+  "compilerOptions": {
+    "lib": ["deno.ns", "dom", "deno.window", "esnext"],
     "strict": true,
     "skipLibCheck": true,
     "types": ["deno"],
-    "jsx": "react-jsx",
-    "include": ["src/**/*.ts", "src/types/**/*.d.ts"]
+    "jsx": "react-jsx"
 },
+
   "tasks": {
     "run:server": "deno run -A --config deno.json src/server.ts"
   }
 }
+

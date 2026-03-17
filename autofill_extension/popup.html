@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, sans-serif; }
+    body { width: 320px; padding: 16px; background: #0f172a; color: #f1f5f9; }
+    h2 { font-size: 15px; font-weight: 600; margin-bottom: 12px; color: #38bdf8; }
+    label { font-size: 11px; color: #94a3b8; display: block; margin-bottom: 3px; margin-top: 10px; }
+    input, textarea, select {
+      width: 100%; padding: 7px 9px; border-radius: 6px;
+      background: #1e293b; border: 1px solid #334155;
+      color: #f1f5f9; font-size: 12px; outline: none;
+    }
+    textarea { resize: vertical; min-height: 60px; }
+    input:focus, textarea:focus { border-color: #38bdf8; }
+    .row { display: flex; gap: 8px; }
+    .row > div { flex: 1; }
+    button {
+      width: 100%; margin-top: 14px; padding: 9px;
+      background: #0ea5e9; color: white; border: none;
+      border-radius: 6px; font-size: 13px; font-weight: 600;
+      cursor: pointer;
+    }
+    button:hover { background: #38bdf8; }
+    #fillBtn { background: #10b981; }
+    #fillBtn:hover { background: #34d399; }
+    #status { font-size: 11px; margin-top: 8px; color: #94a3b8; text-align: center; min-height: 16px; }
+    .section-title {
+      font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em;
+      color: #475569; margin-top: 16px; margin-bottom: 6px;
+      border-bottom: 1px solid #1e293b; padding-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h2>⚡ Job Autofill</h2>
+
+  <div class="section-title">Personal</div>
+  <div class="row">
+    <div><label>First Name</label><input id="firstName" placeholder="Jane" /></div>
+    <div><label>Last Name</label><input id="lastName" placeholder="Smith" /></div>
+  </div>
+  <label>Email</label><input id="email" type="email" placeholder="jane@email.com" />
+  <label>Phone</label><input id="phone" placeholder="+1 555 000 0000" />
+  <label>LinkedIn URL</label><input id="linkedin" placeholder="https://linkedin.com/in/..." />
+  <label>GitHub URL</label><input id="github" placeholder="https://github.com/..." />
+  <label>Portfolio URL</label><input id="portfolio" placeholder="https://..." />
+
+  <div class="section-title">Location</div>
+  <label>City</label><input id="city" placeholder="San Francisco" />
+  <div class="row">
+    <div><label>State</label><input id="state" placeholder="CA" /></div>
+    <div><label>Country</label><input id="country" placeholder="United States" /></div>
+  </div>
+
+  <div class="section-title">Work Authorization</div>
+  <label>Sponsorship Required?</label>
+  <select id="sponsorship">
+    <option value="no">No</option>
+    <option value="yes">Yes</option>
+  </select>
+  <label>Authorized to work in US?</label>
+  <select id="authorized">
+    <option value="yes">Yes</option>
+    <option value="no">No</option>
+  </select>
+
+  <div class="section-title">Resume</div>
+  <label>Resume Plain Text (for AI field filling)</label>
+  <textarea id="resumeText" placeholder="Paste your resume text here..."></textarea>
+
+  <button id="saveBtn">💾 Save Profile</button>
+  <button id="fillBtn">🚀 Fill This Application</button>
+  <div id="status"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

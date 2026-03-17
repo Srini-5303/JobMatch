@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "Job Autofill",
+  "version": "1.0.0",
+  "description": "Auto-fills job applications from your profile",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://boards.greenhouse.io/*",
+    "https://job-boards.greenhouse.io/*",
+    "https://jobs.lever.co/*",
+    "https://jobs.ashbyhq.com/*",
+    "https://*.myworkdayjobs.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://boards.greenhouse.io/*",
+        "https://job-boards.greenhouse.io/*",
+        "https://jobs.lever.co/*",
+        "https://jobs.ashbyhq.com/*",
+        "https://*.myworkdayjobs.com/*"
+      ],
+      "js": [
+        "fillers/greenhouse.js",
+        "fillers/lever.js",
+        "fillers/ashby.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
